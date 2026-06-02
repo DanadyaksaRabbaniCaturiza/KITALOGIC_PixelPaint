@@ -16,7 +16,7 @@ public class KITALOGIC_PixelPaint {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.print("Hi");
-        System.out.print("Dunia");
+        System.out.print("Duniaku");
     }
     
 }
