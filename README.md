@@ -23,6 +23,6 @@ Berkas ini menjelaskan kelengkapan proyek akhir kami yang berjudul **PixelPaint*
 
 Adapun isi berkas meliputi:
 
-- File database SQL dengan nama database: **[Nama Database]**  
+- File database SQL dengan nama database: **pixelpaint_db**  
 - Source code project (NetBeans)  
-- Tautan Repository GitHub: **[Tautan GitHub]**  
+- Tautan Repository GitHub: **[PixelPaint Repo](https://github.com/rdhav/KITALOGIC_PixelPaint)**  
