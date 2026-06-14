@@ -64,8 +64,6 @@ public class ProfileFrame extends javax.swing.JFrame {
         jLabelName = new javax.swing.JLabel();
         jLabelBio = new javax.swing.JLabel();
         jButtonUploadImage = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jScrollPaneWallpaperGallery = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
 
@@ -85,13 +83,6 @@ public class ProfileFrame extends javax.swing.JFrame {
         jButtonUploadImage.setText("Upload");
         jButtonUploadImage.addActionListener(this::jButtonUploadImageActionPerformed);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("PAINT");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(199, 53, 53));
-        jLabel3.setText("PIXEL");
-
         javax.swing.GroupLayout jPanelProfileInfoLayout = new javax.swing.GroupLayout(jPanelProfileInfo);
         jPanelProfileInfo.setLayout(jPanelProfileInfoLayout);
         jPanelProfileInfoLayout.setHorizontalGroup(
@@ -99,40 +90,29 @@ public class ProfileFrame extends javax.swing.JFrame {
             .addGroup(jPanelProfileInfoLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(jPanelProfileInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelProfileInfoLayout.createSequentialGroup()
-                        .addComponent(jLabelBio, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonUploadImage)
-                        .addGap(25, 25, 25))
+                    .addComponent(jLabelBio, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelProfileInfoLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addGap(561, 561, 561))))
+                        .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 772, Short.MAX_VALUE)
+                .addComponent(jButtonUploadImage)
+                .addGap(30, 30, 30))
         );
         jPanelProfileInfoLayout.setVerticalGroup(
             jPanelProfileInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelProfileInfoLayout.createSequentialGroup()
-                .addGroup(jPanelProfileInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelProfileInfoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanelProfileInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)))
-                    .addGroup(jPanelProfileInfoLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanelProfileInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelName))))
+                .addGap(25, 25, 25)
+                .addGroup(jPanelProfileInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelProfileInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonUploadImage)
-                    .addComponent(jLabelBio, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelBio, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
+            .addGroup(jPanelProfileInfoLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jButtonUploadImage)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelProfileInfo, java.awt.BorderLayout.NORTH);
@@ -244,14 +224,12 @@ public class ProfileFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ProfileFrame(2,"","coba").setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ProfileFrame(2,"Alvin","coba").setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonUploadImage;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelBio;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JPanel jPanel1;
