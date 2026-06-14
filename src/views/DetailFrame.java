@@ -3,7 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package views;
-
+import database.DBConnection;
+import java.awt.Image;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import models.Wallpaper;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.sql.*;
 /**
  *
  * @author Nice
@@ -15,9 +28,31 @@ public class DetailFrame extends javax.swing.JFrame {
     /**
      * Creates new form DetailFrame
      */
-    public DetailFrame() {
+    
+   final private Wallpaper wallpaperInfo;
+   final private String currentUsername;
+   final private JFrame mainFrame;
+    
+    public DetailFrame(Wallpaper wp,  int currentUserId, String currentUsername, JFrame mainFrame, File fileGambar) {
+        this.wallpaperInfo = wp;
+        this.currentUsername = currentUsername;
+        this.mainFrame = mainFrame;
+        
+        //this.setSize(800, 615);
         initComponents();
+        
+        this.setTitle(wallpaperInfo.getTitle());
+        
+        if (this.mainFrame instanceof ProfileFrame && currentUserId == wallpaperInfo.getUserId()) {
+            jButtonDelete.setVisible(true);  
+        } else {
+            jButtonDelete.setVisible(false); 
+        }
+
+        showWallpaperDetail(fileGambar);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,47 +63,254 @@ public class DetailFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabelImage = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jButtonDownload = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
+        jLabelImageName = new javax.swing.JLabel();
+        jLabelUploaderName = new javax.swing.JLabel();
+        jLabelCategory = new javax.swing.JLabel();
+        jLabelDate = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabelDescription = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(0, 0));
+        setResizable(false);
+
+        jLabelImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelImage.setMaximumSize(new java.awt.Dimension(800, 500));
+        jLabelImage.setPreferredSize(new java.awt.Dimension(1000, 600));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setMaximumSize(new java.awt.Dimension(0, 0));
+        jPanel2.setPreferredSize(new java.awt.Dimension(800, 165));
+
+        jButtonDownload.setText("Download");
+        jButtonDownload.addActionListener(this::jButtonDownloadActionPerformed);
+
+        jButtonDelete.setText("Delete");
+        jButtonDelete.addActionListener(this::jButtonDeleteActionPerformed);
+
+        jLabelImageName.setText("image_nama");
+
+        jLabelUploaderName.setText("username");
+
+        jLabelCategory.setText("category");
+
+        jLabelDate.setText("date");
+
+        jLabel4.setText("Description :");
+
+        jLabelDescription.setText("description text");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelImageName)
+                    .addComponent(jLabelUploaderName)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabelDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelCategory, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(122, 122, 122)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonDownload)
+                .addContainerGap(78, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelImageName)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabelUploaderName, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelCategory)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelDate))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonDownload)
+                            .addComponent(jButtonDelete))
+                        .addComponent(jLabelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 17, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
+            .addComponent(jLabelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void jButtonDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDownloadActionPerformed
+        // TODO add your handling code here:
+        if (this.wallpaperInfo == null || this.wallpaperInfo.getImagePath() == null) {
+        JOptionPane.showMessageDialog(this, "Data gambar tidak valid!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }   
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Pilih Lokasi Simpan Wallpaper");
+
+        String namaFileBersih = this.wallpaperInfo.getTitle().replaceAll("[^a-zA-Z0-9]", "_") + ".png";
+        fileChooser.setSelectedFile(new File(namaFileBersih));
+
+        int pilihanUser = fileChooser.showSaveDialog(this);
+
+        if (pilihanUser == JFileChooser.APPROVE_OPTION) {
+            File fileTujuan = fileChooser.getSelectedFile();
+            String pathResource = "/uploads/" + this.wallpaperInfo.getImagePath(); 
+
+            try (InputStream input = getClass().getResourceAsStream(pathResource)) {
+                
+                if (input == null) {
+                    throw new FileNotFoundException("File Wallpaper asli tidak ditemukan di dalam sistem!");
                 }
+
+                Files.copy(input, fileTujuan.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                JOptionPane.showMessageDialog(this, "Wallpaper berhasil diunduh!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Gagal mengunduh Wallpaper: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_jButtonDownloadActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new DetailFrame().setVisible(true));
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        // TODO add your handling code here:
+        if (this.wallpaperInfo == null) {
+        JOptionPane.showMessageDialog(this, "Data wallpaper tidak ditemukan!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        
+        int deleteConfirmation = JOptionPane.showConfirmDialog(this, "Delete Wallpaper " + wallpaperInfo.getTitle(), "Konfirmasi",JOptionPane.YES_NO_OPTION);
+      
+        if(deleteConfirmation != JOptionPane.YES_OPTION){
+            return;
+        }
+        
+        //delete dari database
+        String deleteQuerySQL = "DELETE FROM artworks WHERE id = ?";
+        
+        try (Connection con = DBConnection.getConnection();
+            PreparedStatement deletePstmt = con.prepareStatement(deleteQuerySQL)){
+        
+            deletePstmt.setInt(1, wallpaperInfo.getId());
+
+            int barisTerdelete = deletePstmt.executeUpdate();
+            
+            if(barisTerdelete > 0) {
+                
+                //delete dari folder uploads
+                File imageFilePath = new File("src/uploads/" + wallpaperInfo.getImagePath());
+
+                if(imageFilePath.exists()) {
+                    imageFilePath.delete();
+                } else {    
+                    System.out.println("File fisik tidak ditemukan di folder uploads, hanya membersihkan data database.");
+                }
+                
+                
+                JOptionPane.showMessageDialog(this, "Wallpaper berhasil dihapus");
+                
+                this.setVisible(false);
+                this.dispose();
+                
+                if (this.mainFrame != null) {
+                    this.mainFrame.setVisible(true);
+                    ((ProfileFrame)this.mainFrame).showGalleryWallpaperUser();
+                }
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal menghapus! Data tidak ditemukan di database.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            }
+          
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan database: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+      
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    private void showWallpaperDetail(File fileGambar){
+        
+        int lebar = 800;
+        int panjang = 500;
+        
+        if (wallpaperInfo != null) {
+            
+            jLabelImageName.setText(wallpaperInfo.getTitle());
+            jLabelUploaderName.setText("Uploaded By: " + currentUsername);
+            jLabelCategory.setText(wallpaperInfo.getCategory());         
+            jLabelDescription.setText(wallpaperInfo.getDescription());
+            jLabelDate.setText("Created At: " + wallpaperInfo.getTimeAdded().substring(0,wallpaperInfo.getTimeAdded().indexOf(' ')));
+           
+            try {
+                
+                    if (fileGambar.exists()) {
+                        
+                        ImageIcon originalIcon = new ImageIcon(fileGambar.getAbsolutePath());
+
+                        Image scaledImage = originalIcon.getImage().getScaledInstance(lebar, panjang, Image.SCALE_SMOOTH);
+
+                        jLabelImage.setIcon(new ImageIcon(scaledImage));
+                        
+                    } else {
+                        
+                        ImageIcon defaultlIcon = new ImageIcon("uploads/default.jpg");
+                        
+                        Image scaledImage = defaultlIcon.getImage().getScaledInstance(lebar, panjang, Image.SCALE_SMOOTH);
+
+                        jLabelImage.setIcon(new ImageIcon(scaledImage));
+                        
+                    }
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } 
+            
+        } else {
+            System.out.print("Error");
+        }
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonDownload;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelCategory;
+    private javax.swing.JLabel jLabelDate;
+    private javax.swing.JLabel jLabelDescription;
+    private javax.swing.JLabel jLabelImage;
+    private javax.swing.JLabel jLabelImageName;
+    private javax.swing.JLabel jLabelUploaderName;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,21 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package kitalogic_pixelpaint;
-
+import views.ProfileFrame;
 /**
  *
  * @author Nice
  */
 public class KITALOGIC_PixelPaint {
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.print("Hi");
-        System.out.print("Duniaku ahahaha");
+        
+        System.out.print("Duniaku ahahaha");  
         
     }
-    
 }
