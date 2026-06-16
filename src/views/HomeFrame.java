@@ -31,19 +31,18 @@ public class HomeFrame extends javax.swing.JFrame {
 
     public HomeFrame(boolean isLogin, int userID, String username) { 
         this.currentUserId = -1;
-        this.isUserLoggedIn = isLogin;
+        this.currentUsername = "Guest";      
 
         if (isLogin) {
+           this.isUserLoggedIn = isLogin;
            this.currentUserId = userID;
-           this.currentUsername = username;
-           
+           this.currentUsername = username;         
         }
 
         initComponents();   
         ShowWallpaperGalleryAll();
         
-        jLabelUsernameHomePage.setText(currentUsername);
-        
+        jLabelUsernameHomePage.setText(currentUsername);       
     }
 
     /**
@@ -86,8 +85,8 @@ public class HomeFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelProfileIcon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelUsernameHomePage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 878, Short.MAX_VALUE)
+                .addComponent(jLabelUsernameHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 861, Short.MAX_VALUE)
                 .addComponent(jLabelTotalWallpaperHomePage)
                 .addContainerGap())
         );
@@ -108,7 +107,7 @@ public class HomeFrame extends javax.swing.JFrame {
         getContentPane().add(jPanel1, java.awt.BorderLayout.NORTH);
 
         jPanelHomeGallery.setBackground(new java.awt.Color(204, 204, 204));
-        jPanelHomeGallery.setLayout(new java.awt.GridLayout());
+        jPanelHomeGallery.setLayout(new java.awt.GridLayout(1, 0));
         jScrollPanePublicWallpaperGallery.setViewportView(jPanelHomeGallery);
 
         getContentPane().add(jScrollPanePublicWallpaperGallery, java.awt.BorderLayout.CENTER);
@@ -155,6 +154,7 @@ public class HomeFrame extends javax.swing.JFrame {
         jPanelHomeGallery.repaint(); 
         
         jLabelTotalWallpaperHomePage.setText("Total Images : " +  GalleryProvider.countWallpaper(daftarWallpaper));
+    
     }
     
     /**
