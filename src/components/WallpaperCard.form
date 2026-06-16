@@ -81,7 +81,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabelDate" pref="110" max="32767" attributes="0"/>
                       <Component id="jLabelCategory" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelUserName" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelUploaderName" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabelImageTitle" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="252" max="-2" attributes="0"/>
@@ -94,7 +94,7 @@
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Component id="jLabelImageTitle" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabelUserName" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelUploaderName" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelCategory" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -110,7 +110,7 @@
             <Property name="text" type="java.lang.String" value="title"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelUserName">
+        <Component class="javax.swing.JLabel" name="jLabelUploaderName">
           <Properties>
             <Property name="text" type="java.lang.String" value="username"/>
           </Properties>

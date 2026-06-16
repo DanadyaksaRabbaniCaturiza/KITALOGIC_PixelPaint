@@ -65,7 +65,7 @@ public class DetailFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButtonDownload = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
-        jLabelImageName = new javax.swing.JLabel();
+        jLabelImageTitle = new javax.swing.JLabel();
         jLabelUploaderName = new javax.swing.JLabel();
         jLabelCategory = new javax.swing.JLabel();
         jLabelDate = new javax.swing.JLabel();
@@ -90,7 +90,7 @@ public class DetailFrame extends javax.swing.JFrame {
         jButtonDelete.setText("Delete");
         jButtonDelete.addActionListener(this::jButtonDeleteActionPerformed);
 
-        jLabelImageName.setText("image_nama");
+        jLabelImageTitle.setText("image_nama");
 
         jLabelUploaderName.setText("username");
 
@@ -109,7 +109,7 @@ public class DetailFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelImageName)
+                    .addComponent(jLabelImageTitle)
                     .addComponent(jLabelUploaderName)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jLabelDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -117,19 +117,19 @@ public class DetailFrame extends javax.swing.JFrame {
                 .addGap(122, 122, 122)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(130, 130, 130)
                 .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonDownload)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelImageName)
+                    .addComponent(jLabelImageTitle)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -151,14 +151,17 @@ public class DetailFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
-            .addComponent(jLabelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -269,7 +272,7 @@ public class DetailFrame extends javax.swing.JFrame {
         
         if (wallpaperInfo != null) {
             
-            jLabelImageName.setText(wallpaperInfo.getTitle());
+            jLabelImageTitle.setText(wallpaperInfo.getTitle());
             jLabelUploaderName.setText("Uploaded By: " + currentUsername);
             jLabelCategory.setText(wallpaperInfo.getCategory());         
             jLabelDescription.setText(wallpaperInfo.getDescription());
@@ -277,24 +280,23 @@ public class DetailFrame extends javax.swing.JFrame {
            
             try {
                 
-                    if (fileGambar.exists()) {
+                    ImageIcon selectedIcon;
+                    
+                    if (fileGambar.exists() && this.wallpaperInfo.getImagePath() != null) {
                         
-                        ImageIcon originalIcon = new ImageIcon(fileGambar.getAbsolutePath());
+                        selectedIcon = new ImageIcon(fileGambar.getAbsolutePath());
 
-                        Image scaledImage = originalIcon.getImage().getScaledInstance(lebar, panjang, Image.SCALE_SMOOTH);
-
-                        jLabelImage.setIcon(new ImageIcon(scaledImage));
                         
                     } else {
                         
-                        ImageIcon defaultlIcon = new ImageIcon("src/uploads/default.jpg");
-                        
-                        Image scaledImage = defaultlIcon.getImage().getScaledInstance(lebar, panjang, Image.SCALE_SMOOTH);
-
-                        jLabelImage.setIcon(new ImageIcon(scaledImage));
+                        selectedIcon = new ImageIcon("src/uploads/default.jpg");
                         
                     }
                     
+                    Image scaledImage = selectedIcon.getImage().getScaledInstance(lebar, panjang, Image.SCALE_SMOOTH);
+
+                    jLabelImage.setIcon(new ImageIcon(scaledImage));
+                   
                 } catch (Exception e) {
                     e.printStackTrace();
                 } 
@@ -312,7 +314,7 @@ public class DetailFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDate;
     private javax.swing.JLabel jLabelDescription;
     private javax.swing.JLabel jLabelImage;
-    private javax.swing.JLabel jLabelImageName;
+    private javax.swing.JLabel jLabelImageTitle;
     private javax.swing.JLabel jLabelUploaderName;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

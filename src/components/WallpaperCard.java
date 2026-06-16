@@ -46,15 +46,14 @@ public class WallpaperCard extends javax.swing.JPanel {
     
     //tidak login
     public WallpaperCard(Wallpaper wp, JFrame mainFrame) {
-        this.currentUserId = -1;
-        this.currentUsername = "Guest";
         
         this.wallpaperInfo = wp;
+        this.currentUserId = -1;
+        this.currentUsername = "Guest";
         this.mainFrame = mainFrame;
                
         initComponents();
         showWallpaperDetail();
-        getPublicWallpaperCardDetail();
         
         Dimension ukuranTetap = new Dimension(200, 260);
         this.setPreferredSize(ukuranTetap);
@@ -76,7 +75,7 @@ public class WallpaperCard extends javax.swing.JPanel {
         jLabelImage = new javax.swing.JLabel();
         jPanelCardInfo = new javax.swing.JPanel();
         jLabelImageTitle = new javax.swing.JLabel();
-        jLabelUserName = new javax.swing.JLabel();
+        jLabelUploaderName = new javax.swing.JLabel();
         jLabelCategory = new javax.swing.JLabel();
         jLabelDate = new javax.swing.JLabel();
 
@@ -118,7 +117,7 @@ public class WallpaperCard extends javax.swing.JPanel {
 
         jLabelImageTitle.setText("title");
 
-        jLabelUserName.setText("username");
+        jLabelUploaderName.setText("username");
 
         jLabelCategory.setText("kategory");
 
@@ -133,7 +132,7 @@ public class WallpaperCard extends javax.swing.JPanel {
                 .addGroup(jPanelCardInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
                     .addComponent(jLabelCategory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelUserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelUploaderName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelImageTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(252, 252, 252))
         );
@@ -143,7 +142,7 @@ public class WallpaperCard extends javax.swing.JPanel {
                 .addGap(8, 8, 8)
                 .addComponent(jLabelImageTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelUserName)
+                .addComponent(jLabelUploaderName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelCategory)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -194,55 +193,45 @@ public class WallpaperCard extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jPanelCardInfoMouseClicked
 
-    private void getPublicWallpaperCardDetail () {
-        jLabelImageTitle.setText(wallpaperInfo.getTitle());
-        jLabelUserName.setText("Uploaded By: " + getUsernameById(wallpaperInfo.getUserId()));
-        jLabelCategory.setText(wallpaperInfo.getCategory());
-        jLabelDate.setText("Created At: " + wallpaperInfo.getTimeAdded().substring(0, wallpaperInfo.getTimeAdded().indexOf(' ')));
-
-    }
-    
-    private void showWallpaperDetail(){
+    private void showWallpaperDetail() {
         
         int lebar = 310;
         int panjang = 280;
-        
-        
-        if (wallpaperInfo != null) {
-            jLabelImageTitle.setText(wallpaperInfo.getTitle());
-            jLabelUserName.setText("Uploaded By: " + currentUsername);
-            jLabelCategory.setText(wallpaperInfo.getCategory());
-            jLabelDate.setText("Created At: " + wallpaperInfo.getTimeAdded().substring(0, wallpaperInfo.getTimeAdded().indexOf(' ')));
-           
-            try {
-                
-                    File fileGambar = new File("src/uploads/" + this.wallpaperInfo.getImagePath());
-                
-                    if (fileGambar.exists()) {
-                        
-                        ImageIcon originalIcon = new ImageIcon(fileGambar.getAbsolutePath());
 
-                        Image scaledImage = originalIcon.getImage().getScaledInstance(lebar, panjang, Image.SCALE_SMOOTH);
-
-                        jLabelImage.setIcon(new ImageIcon(scaledImage));
-                        
-                    } else {
-                        
-                        ImageIcon defaultlIcon = new ImageIcon("src/uploads/default.jpg");
-                        
-                        Image scaledImage = defaultlIcon.getImage().getScaledInstance(lebar, panjang, Image.SCALE_SMOOTH);
-
-                        jLabelImage.setIcon(new ImageIcon(scaledImage));
-                        
-                    }
-                    
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            
-        } else {
-            System.out.print("Error");
+        if (wallpaperInfo == null) {
+            System.out.println("Error: Data wallpaper tidak ditemukan.");
+            return;
         }
+
+        jLabelImageTitle.setText(wallpaperInfo.getTitle());
+        jLabelUploaderName.setText("Uploaded By: " + getUsernameById(wallpaperInfo.getUserId()));
+        jLabelCategory.setText(wallpaperInfo.getCategory());
+        jLabelDate.setText("Created At: " + wallpaperInfo.getTimeAdded().substring(0, wallpaperInfo.getTimeAdded().indexOf(' ')));
+
+        try {
+
+                File fileGambar = new File("src/uploads/" + this.wallpaperInfo.getImagePath());
+
+                ImageIcon selectedIcon;
+
+                if (fileGambar.exists() && this.wallpaperInfo.getImagePath() != null) {
+
+                    selectedIcon = new ImageIcon(fileGambar.getAbsolutePath());
+
+                } else {
+
+                    selectedIcon = new ImageIcon("src/uploads/default.jpg");
+                }
+
+                Image scaledImage = selectedIcon.getImage().getScaledInstance(lebar, panjang, Image.SCALE_SMOOTH);
+
+                jLabelImage.setIcon(new ImageIcon(scaledImage));
+
+           } catch (Exception e) {
+               
+               e.printStackTrace();
+               
+           }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -250,7 +239,7 @@ public class WallpaperCard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelDate;
     private javax.swing.JLabel jLabelImage;
     private javax.swing.JLabel jLabelImageTitle;
-    private javax.swing.JLabel jLabelUserName;
+    private javax.swing.JLabel jLabelUploaderName;
     private javax.swing.JPanel jPanelCardInfo;
     // End of variables declaration//GEN-END:variables
 }
