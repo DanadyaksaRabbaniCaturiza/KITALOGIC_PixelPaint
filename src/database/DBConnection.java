@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @author Nice
  */
 public class DBConnection {
-      private static final String URL = "jdbc:mysql://localhost:3306/pixelpaint_db";
+    private static final String URL = "jdbc:mysql://localhost:3306/pixelpaint_db";
     private static final String USER = "root";
     private static final String PASSWORD = ""; // atur dengan password kalian
 

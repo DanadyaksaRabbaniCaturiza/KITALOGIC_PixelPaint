@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Jun 2026 pada 16.43
+-- Waktu pembuatan: 12 Jun 2026 pada 05.41
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -32,8 +32,8 @@ CREATE TABLE `artworks` (
   `title` varchar(100) NOT NULL,
   `description` text DEFAULT NULL,
   `category` varchar(50) DEFAULT NULL,
-  `image_path` varchar(255) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -41,9 +41,20 @@ CREATE TABLE `artworks` (
 -- Dumping data untuk tabel `artworks`
 --
 
-INSERT INTO `artworks` (`id`, `title`, `description`, `category`, `image_path`, `user_id`, `created_at`) VALUES
-(1, 'Sunset Art', 'Lukisan matahari terbenam', 'Nature', 'sunset.jpg', 2, '2026-06-10 14:43:37'),
-(2, 'Abstract Lines', 'Seni abstrak garis', 'Abstract', 'abstract.jpg', 2, '2026-06-10 14:43:37');
+INSERT INTO artworks 
+(id, title, description, category, image_path, user_id, created_at)
+VALUES
+(1, 'Sunset Over Mountains', 'Lukisan digital pemandangan matahari terbenam', 'Landscape', '2_1781556972811_sunset.jpg', 2, '2026-06-12 10:12:05'),
+
+(2, 'Abstract Blue', 'Karya abstrak dengan dominasi warna biru', 'Abstract', '2_1781556972811_abstract_blue.jpg', 2, '2026-06-12 10:12:05'),
+
+(3, 'City at Night', 'Ilustrasi kota malam hari dengan lampu neon', 'Illustration', '3_1781556972811_city_night.jpg', 3, '2026-06-12 10:12:05'),
+
+(4, 'Forest Path', 'Jalan setapak di tengah hutan lebat', 'Landscape', '3_1781556972811_forest.jpg', 3, '2026-06-12 10:12:05'),
+
+(5, 'Pixel Cat', 'Kucing lucu dalam gaya pixel art', 'Pixel Art', '4_1781556972811_pixel_cat.jpg', 4, '2026-06-12 10:12:05'),
+
+(6, 'Retro Space', 'Tema luar angkasa bergaya retro 8-bit', 'Pixel Art', '4_1781556972811_retro_space.jpg', 4, '2026-06-12 10:12:05');
 
 -- --------------------------------------------------------
 
@@ -65,8 +76,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `bio`, `role`, `created_at`) VALUES
-(1, 'admin', 'admin123', 'Administrator utama', 'admin', '2026-06-10 14:43:37'),
-(2, 'alvin', 'user123', 'Artist pemula', 'user', '2026-06-10 14:43:37');
+(1, 'admin', 'admin123', 'Administrator PixelPaint', 'admin', '2026-06-12 03:12:05'),
+(2, 'vin_art', 'vin123', 'Digital artist dari Jakarta', 'user', '2026-06-12 03:12:05'),
+(3, 'luna_draws', 'luna123', 'Suka ilustrasi dan sketsa', 'user', '2026-06-12 03:12:05'),
+(4, 'pixel_boy', 'pixel123', 'Hobi bikin pixel art', 'user', '2026-06-12 03:12:05');
 
 --
 -- Indexes for dumped tables
@@ -94,13 +107,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `artworks`
 --
 ALTER TABLE `artworks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -110,7 +123,7 @@ ALTER TABLE `users`
 -- Ketidakleluasaan untuk tabel `artworks`
 --
 ALTER TABLE `artworks`
-  ADD CONSTRAINT `artworks_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `artworks_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
