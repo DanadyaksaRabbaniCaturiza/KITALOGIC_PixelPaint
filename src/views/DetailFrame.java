@@ -7,6 +7,7 @@ import database.DBConnection;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
@@ -176,37 +177,36 @@ public class DetailFrame extends javax.swing.JFrame {
             return;
         }
         
-        File sourceFile = new File("src/uploads/" + this.wallpaperInfo.getImagePath());
+        File fileWallpaper = new File("src/uploads/" + this.wallpaperInfo.getImagePath());
             
-        if (!sourceFile.exists()) {
+        if (!fileWallpaper.exists()) {
         JOptionPane.showMessageDialog(this, """
-            Gagal mendownload! File asli tidak ditemukan di folder: "src/uploads/"
-            Kemungkinan file telah terhapus atau dipindahkan secara manual.""", 
-            "File Tidak Ditemukan", 
-            JOptionPane.ERROR_MESSAGE);
+        Gagal mendownload! File asli tidak ditemukan di folder: "src/uploads/"
+        Kemungkinan file telah terhapus atau dipindahkan secara manual.""", 
+        "File Tidak Ditemukan", JOptionPane.ERROR_MESSAGE);
         return;
         }
         
+        //Memilih letak wallpaper didownload
         JFileChooser fileChooser = new JFileChooser();
-        String namaFileBersih = this.wallpaperInfo.getTitle().replaceAll("[^a-zA-Z0-9]", "_") + ".jpg";
-        fileChooser.setSelectedFile(new File(namaFileBersih));
         fileChooser.setDialogTitle("Pilih Lokasi Simpan Wallpaper");
-      
-        File fileTujuan = fileChooser.getSelectedFile();
         
+        String changedFileName = this.wallpaperInfo.getTitle().replace(" ", "_") + ".jpg";
+        fileChooser.setSelectedFile(new File(changedFileName));       
+      
         int pilihanUser = fileChooser.showSaveDialog(this);
         
         if (pilihanUser == JFileChooser.APPROVE_OPTION) {
            
-            try {
-                
-                Files.copy(sourceFile.toPath(), fileTujuan.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
+            File fileTujuan = fileChooser.getSelectedFile();
+            
+            try {               
+                Files.copy(fileWallpaper.toPath(), fileTujuan.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 JOptionPane.showMessageDialog(this, "Wallpaper berhasil diunduh!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-
-            } catch (Exception e) {
+            } catch (IOException  e) {
                 JOptionPane.showMessageDialog(this, "Gagal mengunduh Wallpaper: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
+            
         }
     }//GEN-LAST:event_jButtonDownloadActionPerformed
 

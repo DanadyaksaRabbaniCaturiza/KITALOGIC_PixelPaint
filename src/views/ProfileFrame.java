@@ -152,14 +152,17 @@ public class ProfileFrame extends javax.swing.JFrame {
     private void jButtonUploadImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUploadImageActionPerformed
         // TODO add your handling code here: 
         JFileChooser fileChooser = new JFileChooser();
+        
         fileChooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
+        
         int result = fileChooser.showOpenDialog(this); 
-
         if (result != JFileChooser.APPROVE_OPTION) {
             return;
         }
 
-        File sourceFile = fileChooser.getSelectedFile();
+        //File wallpaper dari komputer mana yang ingin di upload 
+        File fileWallpaper = fileChooser.getSelectedFile();     
+        
         File targetDirectory = new File("src/uploads"); 
 
         if (!targetDirectory.exists()) {
@@ -167,39 +170,44 @@ public class ProfileFrame extends javax.swing.JFrame {
         }
 
         long timestamp = System.currentTimeMillis();
-        String changedFileName = sourceFile.getName().replace(" ", "_");
-        String uniqueFileName = currentUserId + "_" + timestamp + "_" + changedFileName;
+        String changedFileName = fileWallpaper.getName().replace(" ", "_");
+        String uniqueFileName = currentUserId + "_" + timestamp + "_" + changedFileName;       
+        
         File destinationFile = new File(targetDirectory, uniqueFileName);
 
-        try {
+        try {         
             String title = JOptionPane.showInputDialog(this, "Masukkan Judul Wallpaper:");
-            String description = JOptionPane.showInputDialog(this, "(Boleh di skip!)Masukkan Deskripsi:");
+            String description = JOptionPane.showInputDialog(this, "(Boleh di skip!) Masukkan Deskripsi:");
             String category = JOptionPane.showInputDialog(this, "Masukkan Kategori :");
 
-            if (title == null || category == null) {
+            if (title == null || category == null || title.trim().isEmpty() || category.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Wallpaper harus diberikan title dan Category!!");
                 return;
             }
-
-            // Proses copy file secara langsung ke folder uploads
-            Files.copy(sourceFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
+           
+            // Masukan ke database XAMPP
             String insertQuerySQL = "INSERT INTO artworks (title, description, category, image_path, user_id) VALUES (?, ?, ?, ?, ?)";
             try (Connection con = DBConnection.getConnection();
                 PreparedStatement AddWallapaperPstmt = con.prepareStatement(insertQuerySQL)) {
 
                 AddWallapaperPstmt.setString(1, title);
-                AddWallapaperPstmt.setString(2, description);
+                AddWallapaperPstmt.setString(2, description.trim().isEmpty() ? "" : description);
                 AddWallapaperPstmt.setString(3, category);
                 AddWallapaperPstmt.setString(4, uniqueFileName); 
                 AddWallapaperPstmt.setInt(5, currentUserId);
                 AddWallapaperPstmt.executeUpdate();
+                
+                // Copy file ke folder uploads
+                Files.copy(fileWallpaper.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);           
             }
-
-            showGalleryWallpaperUser();
+            
             JOptionPane.showMessageDialog(this, "Wallpaper berhasil diunggah!");
+            showGalleryWallpaperUser();
 
-        } catch (IOException | SQLException e) {
+        } catch (IOException | SQLException e) {             
+            if (destinationFile.exists()) {
+                destinationFile.delete();
+            }          
             JOptionPane.showMessageDialog(this, "Gagal memproses unggahan: " + e.getMessage());
         }   
     }//GEN-LAST:event_jButtonUploadImageActionPerformed

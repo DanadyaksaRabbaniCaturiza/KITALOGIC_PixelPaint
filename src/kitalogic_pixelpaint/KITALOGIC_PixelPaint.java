@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package kitalogic_pixelpaint;
-import views.ProfileFrame;
+
 /**
  *
  * @author Nice
