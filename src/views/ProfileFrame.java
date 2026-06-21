@@ -37,17 +37,42 @@ public class ProfileFrame extends javax.swing.JFrame {
     public ProfileFrame(int userId, String username, String bio) {
         this.currentUserId = userId; 
         this.currentUsername = username;
-        
+
         if (currentUserId > 0) {
-        isLogin = true;
+            isLogin = true;
         }
-    
+
         initComponents(); 
-               
+
         showGalleryWallpaperUser();   
-        
+
         jLabelName.setText(username);
-        jLabelBio.setText(bio);       
+
+        if (bio == null || bio.isEmpty()) {
+            bio = getBioFromDatabase(userId);
+        }
+        jLabelBio.setText(bio);   
+    }
+    
+    private String getBioFromDatabase(int userId) {
+        String result = "";
+        String sql = "SELECT bio FROM users WHERE id = ?";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                result = rs.getString("bio");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     /**
@@ -71,7 +96,7 @@ public class ProfileFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Profile Page");
-        setPreferredSize(new java.awt.Dimension(1080, 412));
+        setPreferredSize(new java.awt.Dimension(1080, 660));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("WELCOME");
