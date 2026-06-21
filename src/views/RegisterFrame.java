@@ -4,6 +4,10 @@
  */
 package views;
 
+import dao.UserDAO;
+import models.User;
+import models.RegularUser;
+import models.AdminUser;
 /**
  *
  * @author Nice
@@ -19,6 +23,10 @@ public class RegisterFrame extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
+        
+        openPwd.setContentAreaFilled(false);
+        openRPw.setContentAreaFilled(false);
+
     }
 
     /**
@@ -30,21 +38,329 @@ public class RegisterFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        registerPanel = new javax.swing.JPanel();
+        banner = new javax.swing.JPanel();
+        sideBanner = new javax.swing.JLabel();
+        formLogin3 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        usernameLbl3 = new javax.swing.JLabel();
+        usernameTxt = new javax.swing.JTextField();
+        passwordLbl3 = new javax.swing.JLabel();
+        passwordTxt = new javax.swing.JPasswordField();
+        daftarBtn = new javax.swing.JButton();
+        openPwd = new javax.swing.JButton();
+        errorLabell = new javax.swing.JLabel();
+        passwordLbl4 = new javax.swing.JLabel();
+        repeatPasswordTxt = new javax.swing.JPasswordField();
+        openRPw = new javax.swing.JButton();
+        loginnAccLbl = new javax.swing.JLabel();
+        loginAccLbl = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        registerPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        banner.setBackground(new java.awt.Color(255, 255, 255));
+
+        sideBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login_side_banner.png"))); // NOI18N
+        sideBanner.setToolTipText("");
+        sideBanner.setAlignmentY(0.0F);
+
+        javax.swing.GroupLayout bannerLayout = new javax.swing.GroupLayout(banner);
+        banner.setLayout(bannerLayout);
+        bannerLayout.setHorizontalGroup(
+            bannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sideBanner, javax.swing.GroupLayout.PREFERRED_SIZE, 732, Short.MAX_VALUE)
+        );
+        bannerLayout.setVerticalGroup(
+            bannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sideBanner, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        formLogin3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel10.setText("Let’s get you started!");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Start your creative journey.");
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logoPixelPaint.png"))); // NOI18N
+        jLabel12.setText(" ixelPaint");
+
+        usernameLbl3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        usernameLbl3.setText("Username:");
+
+        usernameTxt.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        usernameTxt.addActionListener(this::usernameTxtActionPerformed);
+
+        passwordLbl3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        passwordLbl3.setText("Password: ");
+
+        passwordTxt.setEchoChar('\u25cf');
+        passwordTxt.addActionListener(this::passwordTxtActionPerformed);
+
+        daftarBtn.setBackground(new java.awt.Color(51, 102, 255));
+        daftarBtn.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        daftarBtn.setForeground(new java.awt.Color(255, 255, 255));
+        daftarBtn.setText("Sign Up");
+        daftarBtn.setToolTipText("");
+        daftarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        daftarBtn.addActionListener(this::daftarBtnActionPerformed);
+
+        openPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eyesIcon.png"))); // NOI18N
+        openPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        openPwd.addActionListener(this::openPwdActionPerformed);
+
+        errorLabell.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        passwordLbl4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        passwordLbl4.setText("Repeat Password: ");
+
+        repeatPasswordTxt.setEchoChar('\u25cf');
+        repeatPasswordTxt.addActionListener(this::repeatPasswordTxtActionPerformed);
+
+        openRPw.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eyesIcon.png"))); // NOI18N
+        openRPw.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        openRPw.addActionListener(this::openRPwActionPerformed);
+
+        javax.swing.GroupLayout formLogin3Layout = new javax.swing.GroupLayout(formLogin3);
+        formLogin3.setLayout(formLogin3Layout);
+        formLogin3Layout.setHorizontalGroup(
+            formLogin3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(formLogin3Layout.createSequentialGroup()
+                .addGroup(formLogin3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(formLogin3Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel10))
+                    .addGroup(formLogin3Layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(jLabel12)))
+                .addContainerGap(42, Short.MAX_VALUE))
+            .addGroup(formLogin3Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(formLogin3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(formLogin3Layout.createSequentialGroup()
+                        .addComponent(errorLabell)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(formLogin3Layout.createSequentialGroup()
+                        .addGroup(formLogin3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(daftarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(usernameTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, formLogin3Layout.createSequentialGroup()
+                                .addGroup(formLogin3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(passwordLbl3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(usernameLbl3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(passwordLbl4, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, formLogin3Layout.createSequentialGroup()
+                                .addGroup(formLogin3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(repeatPasswordTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                                    .addComponent(passwordTxt))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(formLogin3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(openPwd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(openRPw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(23, 23, 23))))
+            .addGroup(formLogin3Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel11)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        formLogin3Layout.setVerticalGroup(
+            formLogin3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(formLogin3Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel11)
+                .addGap(28, 28, 28)
+                .addComponent(usernameLbl3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(usernameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(passwordLbl3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(formLogin3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(openPwd, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(passwordTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(passwordLbl4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(formLogin3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(openRPw, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(repeatPasswordTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(daftarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(errorLabell))
+        );
+
+        loginnAccLbl.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        loginnAccLbl.setText("Welcome back! Sign in");
+
+        loginAccLbl.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        loginAccLbl.setForeground(new java.awt.Color(0, 0, 255));
+        loginAccLbl.setText("here!");
+        loginAccLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        loginAccLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginAccLblMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout registerPanelLayout = new javax.swing.GroupLayout(registerPanel);
+        registerPanel.setLayout(registerPanelLayout);
+        registerPanelLayout.setHorizontalGroup(
+            registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerPanelLayout.createSequentialGroup()
+                .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(registerPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(formLogin3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(loginnAccLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(loginAccLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)))
+                .addComponent(banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        registerPanelLayout.setVerticalGroup(
+            registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(registerPanelLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loginnAccLbl)
+                    .addComponent(loginAccLbl))
+                .addGap(46, 46, 46)
+                .addComponent(formLogin3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
+            .addComponent(registerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 660, Short.MAX_VALUE)
+            .addComponent(registerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void usernameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTxtActionPerformed
+        // TODO add your handling code here:
+        daftarBtnActionPerformed(evt);
+    }//GEN-LAST:event_usernameTxtActionPerformed
+
+    private void passwordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTxtActionPerformed
+        // TODO add your handling code here:
+        daftarBtnActionPerformed(evt);
+    }//GEN-LAST:event_passwordTxtActionPerformed
+
+    private void daftarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarBtnActionPerformed
+        // TODO add your handling code here:
+        String username = usernameTxt.getText().trim();
+        String password = new String(passwordTxt.getPassword()).trim();
+        String repeatPassword = new String(repeatPasswordTxt.getPassword()).trim();
+
+        if (username.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()) {
+            errorLabell.setText("* Semua field wajib diisi!");
+            errorLabell.setForeground(java.awt.Color.RED);
+            return;
+        }
+
+        if (username.length() < 8) {
+            errorLabell.setText("* Username minimal 8 karakter!");
+            errorLabell.setForeground(java.awt.Color.RED);
+            return;
+        }
+
+        if (password.length() < 8) {
+            errorLabell.setText("* Password minimal 8 karakter!");
+            errorLabell.setForeground(java.awt.Color.RED);
+            return;
+        }
+
+        boolean adaSimbol = false;
+        String simbol = "!@#$%^&*()-_=+[]{};:,.<>?";
+        for (char c : password.toCharArray()) {
+            if (simbol.indexOf(c) != -1) {
+                adaSimbol = true;
+                break;
+            }
+        }
+
+        if (!adaSimbol) {
+            errorLabell.setText("* Password harus mengandung simbol (!@#$%, dll)!");
+            errorLabell.setForeground(java.awt.Color.RED);
+            return;
+        }
+
+        if (!password.equals(repeatPassword)) {
+            errorLabell.setText("* Password tidak cocok!");
+            errorLabell.setForeground(java.awt.Color.RED);
+            return;
+        }
+
+        UserDAO userDAO = new UserDAO();
+        boolean success = userDAO.register(username, password);
+
+        if (success) {
+            errorLabell.setText("Registrasi berhasil! Silakan login.");
+            errorLabell.setForeground(new java.awt.Color(0, 153, 0));
+
+            this.dispose();
+            new views.LoginFrame().setVisible(true);
+        } else {
+            errorLabell.setText("* Username sudah dipakai!");
+            errorLabell.setForeground(java.awt.Color.RED);
+        }
+    }//GEN-LAST:event_daftarBtnActionPerformed
+
+    private boolean isPasswordVisible = false;
+    private void openPwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openPwdActionPerformed
+        // TODO add your handling code here:
+        if (isPasswordVisible) {
+            passwordTxt.setEchoChar('\u25CF');
+        } else {
+            passwordTxt.setEchoChar((char) 0);
+        }
+        isPasswordVisible = !isPasswordVisible;
+    }//GEN-LAST:event_openPwdActionPerformed
+
+    private void loginAccLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginAccLblMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        new views.LoginFrame().setVisible(true);
+    }//GEN-LAST:event_loginAccLblMouseClicked
+
+    private void repeatPasswordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repeatPasswordTxtActionPerformed
+        // TODO add your handling code here:
+         daftarBtnActionPerformed(evt);
+    }//GEN-LAST:event_repeatPasswordTxtActionPerformed
+    
+    private boolean isRepeatPasswordVisible = false;
+    private void openRPwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openRPwActionPerformed
+        // TODO add your handling code here:
+        if (isRepeatPasswordVisible) {
+            repeatPasswordTxt.setEchoChar('\u25CF');
+        } else {
+            repeatPasswordTxt.setEchoChar((char) 0);
+        }
+        isRepeatPasswordVisible = !isRepeatPasswordVisible;
+    }//GEN-LAST:event_openRPwActionPerformed
 
     /**
      * @param args the command line arguments
@@ -72,5 +388,24 @@ public class RegisterFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel banner;
+    private javax.swing.JButton daftarBtn;
+    private javax.swing.JLabel errorLabell;
+    private javax.swing.JPanel formLogin3;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel loginAccLbl;
+    private javax.swing.JLabel loginnAccLbl;
+    private javax.swing.JButton openPwd;
+    private javax.swing.JButton openRPw;
+    private javax.swing.JLabel passwordLbl3;
+    private javax.swing.JLabel passwordLbl4;
+    private javax.swing.JPasswordField passwordTxt;
+    private javax.swing.JPanel registerPanel;
+    private javax.swing.JPasswordField repeatPasswordTxt;
+    private javax.swing.JLabel sideBanner;
+    private javax.swing.JLabel usernameLbl3;
+    private javax.swing.JTextField usernameTxt;
     // End of variables declaration//GEN-END:variables
 }

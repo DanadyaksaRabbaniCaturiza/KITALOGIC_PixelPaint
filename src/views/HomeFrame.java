@@ -40,6 +40,8 @@ public class HomeFrame extends javax.swing.JFrame {
         }
 
         initComponents();   
+        setResizable(false);
+        setLocationRelativeTo(null);
         ShowWallpaperGalleryAll();
         
         jLabelUsernameHomePage.setText(currentUsername);       
@@ -63,7 +65,7 @@ public class HomeFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Home Page");
-        setPreferredSize(new java.awt.Dimension(1080, 412));
+        setPreferredSize(new java.awt.Dimension(1080, 660));
 
         jLabelProfileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-profile-48.png"))); // NOI18N
         jLabelProfileIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -86,7 +88,7 @@ public class HomeFrame extends javax.swing.JFrame {
                 .addComponent(jLabelProfileIcon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelUsernameHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 861, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 849, Short.MAX_VALUE)
                 .addComponent(jLabelTotalWallpaperHomePage)
                 .addContainerGap())
         );
@@ -122,10 +124,10 @@ public class HomeFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Akses Ditolak! Anda harus login terlebih dahulu untuk melihat profil.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         } 
-        
+
         this.dispose();
-        
-        ProfileFrame profilePage = new ProfileFrame(currentUserId, "", "");
+
+        ProfileFrame profilePage = new ProfileFrame(currentUserId, currentUsername, null);
         profilePage.setVisible(true);
     }//GEN-LAST:event_jLabelProfileIconMouseClicked
 

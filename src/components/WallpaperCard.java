@@ -211,7 +211,8 @@ public class WallpaperCard extends javax.swing.JPanel {
         try {
 
                 File fileGambar = new File("src/uploads/" + this.wallpaperInfo.getImagePath());
-
+                System.out.println("Mencari file di: " + fileGambar.getAbsolutePath());
+                System.out.println("File ditemukan? " + fileGambar.exists());
                 ImageIcon selectedIcon;
 
                 if (fileGambar.exists() && this.wallpaperInfo.getImagePath() != null) {

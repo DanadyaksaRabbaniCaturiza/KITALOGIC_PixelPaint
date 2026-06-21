@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package views;
-
+import models.AdminUser;
 /**
  *
  * @author Nice
@@ -11,12 +11,13 @@ package views;
 public class ManageFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ManageFrame.class.getName());
-
+    private AdminUser adminUser;
     /**
      * Creates new form ManageFrame
      */
-    public ManageFrame() {
+    public ManageFrame(AdminUser adminUser) {
         initComponents();
+        this.adminUser = adminUser;
     }
 
     /**
@@ -66,7 +67,10 @@ public class ManageFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ManageFrame().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+        AdminUser dummyAdmin = new AdminUser(0, "TestAdmin", "1234", "Admin testing");
+        new ManageFrame(dummyAdmin).setVisible(true);
+});
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
